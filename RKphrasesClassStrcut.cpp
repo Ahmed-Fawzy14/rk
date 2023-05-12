@@ -49,6 +49,10 @@ unordered_map<string, string> Phrases::rabinKarpPolyPhrases(string main, string 
     int l = 0;
     int probeIM = 0; 
     int probeIC = 0;
+    mainIndex = 0;
+    corpus1Index = 0;
+    mainIndexPrint = 0;
+    corpus1IndexPrint = 0;
 
 
     l = longer(n, m);
@@ -59,8 +63,8 @@ unordered_map<string, string> Phrases::rabinKarpPolyPhrases(string main, string 
     {
 
         //removes spaces from both strings and gets substring phrases
-        string mSub = removeSpaces(main, mainIndex, words);
-        string c1Sub = removeSpaces(c1, corpus1Index, words);
+        string mSub = calcBound(main, mainIndex, words);
+        string c1Sub = calcBound(c1, corpus1Index, words);
         string mSubPrint = calcBound(main, mainIndexPrint, words);
         string c1SubPrint = calcBound(c1, corpus1IndexPrint, words);
         /* string c2Sub = calcBound(c1, corpus2Index, words);
@@ -138,7 +142,7 @@ unordered_map<string, string> Phrases::rabinKarpPolyPhrases(string main, string 
             else
             {
                 if (match1 == true) {
-                    //inserst matches found into the results hash map
+                    //inserst matches found into the results hash map// they may not be updated
                     found.insert({ c1SplitPrint[it->first] , mainSplitPrint[it->first] + "\t From Document 1 \t" });
 
 
